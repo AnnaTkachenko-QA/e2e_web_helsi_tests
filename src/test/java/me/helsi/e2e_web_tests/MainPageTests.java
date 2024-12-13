@@ -16,7 +16,7 @@ public class MainPageTests {
         open("https://helsi.me/");
 
         //close city picker
-        $(".wrapper__select-wrapper>.city-select-container").click();
+        $(".wrapper__select-wrapper>.city-select-container").shouldBe(visible).click();
 
         //close banner
         $(shadowCss("button[class='close']","getsitecontrol-widget")).click();
@@ -37,7 +37,7 @@ public class MainPageTests {
         open("https://helsi.me/");
 
         //close city picker
-        $(".wrapper__select-wrapper>.city-select-container").click();
+        $(".wrapper__select-wrapper>.city-select-container").shouldBe(visible).click();
 
         //close banner
         //$(shadowCss("button[class='close']","getsitecontrol-widget")).click();
