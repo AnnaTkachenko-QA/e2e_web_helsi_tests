@@ -1,19 +1,24 @@
 package me.helsi.e2e_tests.web.pages;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static me.helsi.e2e_tests.utils.LogsHandler.getCodeForLoginFromConsoleLogs;
 
 public class AuthModal {
+    private final SelenideElement submitBtn = $("button[type='submit']");
+
     public void isLoaded() {
         $("[class*='Auth_Title']").shouldBe(visible);
     }
 
     public void loginUser(String phoneNumber, String password) {
-        $("[id='phone']").setValue(phoneNumber);
-        $("button[type='submit']").click();
-        $("[id='password']").shouldBe(visible).setValue(password);
-        $("button[type='submit']").click();
-        $("[id='code']").shouldBe(visible).setValue(""); //todo copy code from logs?
-        $("button[type='submit']").click();
+        $("#phone").setValue(phoneNumber);
+        submitBtn.click();
+        $("#password").shouldBe(visible).setValue(password);
+        submitBtn.click();
+        $("#code").shouldBe(visible).setValue(getCodeForLoginFromConsoleLogs());
+        submitBtn.click();
     }
 }

@@ -15,11 +15,11 @@ public class MainPage {
     private final SelenideElement searchField = $(".search__field");
 
     public void open() {
-        Selenide.open("");
+        Selenide.open("/");
     }
 
     public void closeCityPicker() {
-        $(".wrapper__select-wrapper [class*='CitySelect_closeContainer']").shouldBe(visible).click();
+        $(".wrapper__select-wrapper [class*='CitySelect_closeContainer']").click();
     }
 
     public void closeBanner() {

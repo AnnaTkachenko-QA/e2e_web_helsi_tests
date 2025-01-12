@@ -3,15 +3,17 @@ package me.helsi.e2e_web_tests;
 import me.helsi.e2e_tests.web.pages.AuthModal;
 import me.helsi.e2e_tests.web.pages.DoctorSearchResultsPage;
 import me.helsi.e2e_tests.web.pages.MainPage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 
-public class MainPageTests extends BaseTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class MainPageTests extends BaseWithCustomWebDriverTest {
 
-    private static final MainPage mainPage = new MainPage();
-    private static final AuthModal authModal = new AuthModal();
-    private static final DoctorSearchResultsPage doctorSearchResultsPage = new DoctorSearchResultsPage();
+    private final MainPage mainPage = new MainPage();
+    private final AuthModal authModal = new AuthModal();
+    private final DoctorSearchResultsPage doctorSearchResultsPage = new DoctorSearchResultsPage();
     static String userPhonenumber = env.get("USER_PHONENUMBER");
     static String password = env.get("PASSWORD");
     String targetDoctorSpeciality = "Сімейний лікар";
@@ -24,6 +26,7 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test
+    @Order(1)
     public void searchDoctorBySpecialityTest() {
 
         mainPage.closeBanner();
@@ -36,6 +39,7 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test
+    @Order(2)
     public void searchDoctorBySurnameTest() {
 
         mainPage.searchDoctorBySurname(targetDoctorSurname);
@@ -48,10 +52,11 @@ public class MainPageTests extends BaseTest {
     }
 
     @Test
+    @Order(3)
     public void loginUser() {
         mainPage.openAuthModal();
         authModal.isLoaded();
         authModal.loginUser(userPhonenumber, password);
-        //todo check user is authorised
+        $("[class*='CabinetHeader_container']").shouldBe(visible); //todo
     }
 }
