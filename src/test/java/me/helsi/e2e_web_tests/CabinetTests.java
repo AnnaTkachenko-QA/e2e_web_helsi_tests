@@ -24,8 +24,5 @@ public class CabinetTests extends BaseWithCustomWebDriverTest {
         app.authModal.isLoaded()
                 .loginUser(userPhonenumber, password);
         app.eventsPage.isLoaded();
-        ///
     }
-
-
 }

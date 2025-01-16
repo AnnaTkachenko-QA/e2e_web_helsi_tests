@@ -35,17 +35,24 @@ public class MainPage {
         return this;
     }
 
-    //todo refactor search methods
-    public MainPage searchDoctorBySpeciality(String doctorSpeciality) {
-        searchModeSelector.shouldHave(text("Записатися до лікаря"));
-        searchField.setValue(doctorSpeciality);
+    public MainPage selectSearchMode(String targetSearchMode){
+        searchModeSelector.click();
+        $(byText(targetSearchMode)).click();
+        searchModeSelector.shouldHave(text(targetSearchMode));
+        return this;
+    }
+
+    public MainPage selectDoctorSpecialityFromAutocomplite(String doctorSpeciality) {
         $(".autocomplete__suggestion>span").shouldHave(text(doctorSpeciality)).click();
         return this;
     }
 
-    public MainPage searchDoctorBySurname(String doctorSurname) {
-        searchModeSelector.shouldHave(text("Записатися до лікаря"));
-        searchField.setValue(doctorSurname);
+    public MainPage setValueAtSearchField (String searchValue) {
+        searchField.setValue(searchValue);
+        return this;
+    }
+
+    public MainPage clickSearchBtn() {
         $("[class*=Search_search__btn]").click();
         return this;
     }
