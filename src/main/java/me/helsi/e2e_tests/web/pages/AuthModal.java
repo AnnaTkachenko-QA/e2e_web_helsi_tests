@@ -9,16 +9,18 @@ import static me.helsi.e2e_tests.utils.LogsHandler.getCodeForLoginFromConsoleLog
 public class AuthModal {
     private final SelenideElement submitBtn = $("button[type='submit']");
 
-    public void isLoaded() {
+    public AuthModal isLoaded() {
         $("[class*='Auth_Title']").shouldBe(visible);
+        return this;
     }
 
-    public void loginUser(String phoneNumber, String password) {
+    public AuthModal loginUser(String phoneNumber, String password) {
         $("#phone").setValue(phoneNumber);
         submitBtn.click();
         $("#password").shouldBe(visible).setValue(password);
         submitBtn.click();
         $("#code").shouldBe(visible).setValue(getCodeForLoginFromConsoleLogs());
         submitBtn.click();
+        return this;
     }
 }

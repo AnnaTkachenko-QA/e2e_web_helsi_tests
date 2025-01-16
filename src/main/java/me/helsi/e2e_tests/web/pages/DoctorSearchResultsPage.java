@@ -9,24 +9,29 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DoctorSearchResultsPage {
 
-    public void isLoaded() {
+    public DoctorSearchResultsPage isLoaded() {
         $("[class*='FindPage_titleBlock']").shouldBe(visible);
+        return this;
     }
 
-    public void checkSearchQueryAtSearchField(String searchQuery) {
+    public DoctorSearchResultsPage checkSearchQueryAtSearchField(String searchQuery) {
         $(byValue(searchQuery)).shouldBe(visible);
+        return this;
     }
 
-    public void checkSearchQueryInPageTitle(String searchQuery) {
+    public DoctorSearchResultsPage checkSearchQueryInPageTitle(String searchQuery) {
         $(withTagAndText("span", searchQuery)).shouldBe(visible);
+        return this;
     }
 
     //todo join 2 methods checkSpecialityForAllSearchResults + checkSurnameForAllSearchResults
-    public void checkSpecialityForAllSearchResults(String doctorSpeciality, int expectedSearchResultsSize) {
+    public DoctorSearchResultsPage checkSpecialityForAllSearchResults(String doctorSpeciality, int expectedSearchResultsSize) {
         $$(withTagAndText("a", doctorSpeciality)).shouldHave(size(expectedSearchResultsSize));
+        return this;
     }
 
-    public void checkSurnameForAllSearchResults(String targetDoctorName, int expectedSearchResultsSize) {
+    public DoctorSearchResultsPage checkSurnameForAllSearchResults(String targetDoctorName, int expectedSearchResultsSize) {
         $$(withTagAndText("a", targetDoctorName)).shouldHave(size(expectedSearchResultsSize));
+        return this;
     }
 }

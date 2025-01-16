@@ -14,32 +14,39 @@ public class MainPage {
     private final SelenideElement searchModeSelector = $(".Select-value-label-text");
     private final SelenideElement searchField = $(".search__field");
 
-    public void open() {
+    public MainPage open() {
         Selenide.open("/");
+        return this;
     }
 
-    public void closeCityPicker() {
+    public MainPage closeCityPicker() {
         $(".wrapper__select-wrapper [class*='CitySelect_closeContainer']").click();
+        return this;
     }
 
-    public void closeBanner() {
+    public MainPage closeBanner() {
         $(shadowCss("button[class='close']", "getsitecontrol-widget")).shouldBe(visible).click();
+        return this;
     }
 
-    public void openAuthModal() {
+    public MainPage openAuthModal() {
         $("[aria-label='відкрити меню']").click();
         $(byText("Увійти в кабінет")).click();
+        return this;
     }
 
-    public void searchDoctorBySpeciality(String doctorSpeciality) {
+    //todo refactor search methods
+    public MainPage searchDoctorBySpeciality(String doctorSpeciality) {
         searchModeSelector.shouldHave(text("Записатися до лікаря"));
         searchField.setValue(doctorSpeciality);
         $(".autocomplete__suggestion>span").shouldHave(text(doctorSpeciality)).click();
+        return this;
     }
 
-    public void searchDoctorBySurname(String doctorSurname) {
+    public MainPage searchDoctorBySurname(String doctorSurname) {
         searchModeSelector.shouldHave(text("Записатися до лікаря"));
         searchField.setValue(doctorSurname);
         $("[class*=Search_search__btn]").click();
+        return this;
     }
 }
