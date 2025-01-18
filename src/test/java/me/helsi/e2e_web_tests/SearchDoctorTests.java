@@ -1,13 +1,11 @@
 package me.helsi.e2e_web_tests;
 
-import com.codeborne.selenide.junit5.TextReportExtension;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SearchDoctorTests extends BaseTest {
 
-    String targetSearchMode= "Записатися до лікаря";
+    String targetSearchMode = "Записатися до лікаря";
     String targetDoctorSpeciality = "Сімейний лікар";
     String targetDoctorSurname = "Ткаченко";
 
@@ -17,7 +15,6 @@ public class SearchDoctorTests extends BaseTest {
                 .closeCityPicker();
     }
 
-    @ExtendWith(TextReportExtension.class)
     @Test
     @Order(1)
     public void searchDoctorBySpecialityTest() {
@@ -33,7 +30,6 @@ public class SearchDoctorTests extends BaseTest {
                 .checkSpecialityForAllSearchResults(targetDoctorSpeciality, 10);
     }
 
-    @ExtendWith(TextReportExtension.class)
     @Test
     @Order(2)
     public void searchDoctorBySurnameTest() {
