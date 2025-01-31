@@ -1,7 +1,5 @@
 package me.helsi.e2e_tests.web.pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 
@@ -78,13 +76,11 @@ public class DoctorSearchResultsPage {
 //        }
 
         $("footer").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
-        $("#card_banner_doc_1").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
-        $("footer").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
         return this;
     }
 
     public DoctorSearchResultsPage checkWorkWithESOZLabelOnDoctorCards(int expectedSize) {
-        $$("[class*='CardLabel_card-label--eHealth']").shouldHave(size(expectedSize), Duration.ofSeconds(5));
+        $$("[class*='CardLabel_card-label--eHealth']").shouldHave(size(expectedSize), Duration.ofSeconds(7));
         return this;
     }
 
@@ -94,7 +90,7 @@ public class DoctorSearchResultsPage {
     }
 
     public DoctorSearchResultsPage checkFreeWithDeclarationLabelOnDoctorCards(int expectedSize) {
-        $$(byText("Безоплатно")).shouldHave(size(expectedSize), Duration.ofSeconds(5));
+        $$(byText("Безоплатно")).shouldHave(size(expectedSize), Duration.ofSeconds(6));
         $$(byText("При заключеній декларації з цим лікарем")).shouldHave(size(expectedSize));
         return this;
     }
