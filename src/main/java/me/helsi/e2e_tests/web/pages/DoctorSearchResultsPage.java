@@ -1,11 +1,15 @@
 package me.helsi.e2e_tests.web.pages;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+
+import java.time.Duration;
+
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class DoctorSearchResultsPage {
 
@@ -42,6 +46,11 @@ public class DoctorSearchResultsPage {
         return this;
     }
 
+    public DoctorSearchResultsPage selectLabelWithPopoverAtFilter(String targetFilter) {
+        $(byTagAndText("label/span/div", targetFilter)).click();
+        return this;
+    }
+
     public DoctorSearchResultsPage checkFiltrationChip(String expectedFiltrationChip) {
         $("[class*='FilterChips_chip']").shouldHave(text(expectedFiltrationChip));
         return this;
@@ -54,6 +63,39 @@ public class DoctorSearchResultsPage {
 
     public DoctorSearchResultsPage removeFilterChip() {
         $("[class*='FilterChips_removeIcon']").click();
+        return this;
+    }
+
+    public DoctorSearchResultsPage checkAcceptDeclarationLabelOnDoctorCards(String expectedAcceptDeclarationLabel, int expectedSize) {
+        $$(byTagAndText("span", expectedAcceptDeclarationLabel)).shouldHave(size(expectedSize));
+        return this;
+    }
+
+    public DoctorSearchResultsPage scrollPageToFooter() {
+//        ElementsCollection doctorCards = $$("[class*='Card_card']").shouldHave(size(10));
+//        for (SelenideElement doctorCard : doctorCards){
+//            doctorCard.scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
+//        }
+
+        $("footer").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
+        $("#card_banner_doc_1").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
+        $("footer").scrollIntoView("{block: \"center\", behavior: \"smooth\"}");
+        return this;
+    }
+
+    public DoctorSearchResultsPage checkWorkWithESOZLabelOnDoctorCards(int expectedSize) {
+        $$("[class*='CardLabel_card-label--eHealth']").shouldHave(size(expectedSize), Duration.ofSeconds(5));
+        return this;
+    }
+
+    public DoctorSearchResultsPage checkOnlineConsultationLabelOnDoctorCards(int expectedSize) {
+        $$("[class*='CardLabel_card-label--video']").shouldHave(size(expectedSize));
+        return this;
+    }
+
+    public DoctorSearchResultsPage checkFreeWithDeclarationLabelOnDoctorCards(int expectedSize) {
+        $$(byText("Безоплатно")).shouldHave(size(expectedSize), Duration.ofSeconds(5));
+        $$(byText("При заключеній декларації з цим лікарем")).shouldHave(size(expectedSize));
         return this;
     }
 }

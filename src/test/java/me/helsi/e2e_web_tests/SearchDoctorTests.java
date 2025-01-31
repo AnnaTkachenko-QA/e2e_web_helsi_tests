@@ -61,4 +61,60 @@ public class SearchDoctorTests extends BaseTest {
                 .checkFiltrationChip("Державні")
                 .checkOrganisationTypeLabelOnDoctorCards("Державна клініка", 10);
     }
+
+    @Test
+    @Order(4)
+    public void filterDoctorSearchResultsByAcceptDeclarationParameterTest() {
+        app.mainPage.selectSearchMode(targetSearchMode)
+                .clickSearchBtn();
+
+        app.doctorSearchResultsPage.isLoaded()
+                .checkSearchQueryAtSearchField("")
+                .selectLabelAtFilter("Лікар приймає декларації")
+                .checkFiltrationChip("Лікар приймає декларації")
+                .scrollPageToFooter()
+                .checkAcceptDeclarationLabelOnDoctorCards("Приймає декларації",10);
+    }
+
+    @Test
+    @Order(5)
+    public void filterDoctorSearchResultsByWorkWithESOZParameterTest() {
+        app.mainPage.selectSearchMode(targetSearchMode)
+                .clickSearchBtn();
+
+        app.doctorSearchResultsPage.isLoaded()
+                .checkSearchQueryAtSearchField("")
+                .selectLabelWithPopoverAtFilter("Лікар працює з eHealth (ЕСОЗ)")
+                .checkFiltrationChip("Лікар працює з eHealth (ЕСОЗ)")
+                .scrollPageToFooter()
+                .checkWorkWithESOZLabelOnDoctorCards(10);
+    }
+
+    @Test
+    @Order(6)
+    public void filterDoctorSearchResultsByOnlineConsultationParameterTest() {
+        app.mainPage.selectSearchMode(targetSearchMode)
+                .clickSearchBtn();
+
+        app.doctorSearchResultsPage.isLoaded()
+                .checkSearchQueryAtSearchField("")
+                .selectLabelWithPopoverAtFilter("Онлайн консультація")
+                .checkFiltrationChip("Онлайн консультація")
+                .scrollPageToFooter()
+                .checkOnlineConsultationLabelOnDoctorCards(10);
+    }
+
+    @Test
+    @Order(7)
+    public void filterDoctorSearchResultsByFreeAppointmentWithDeclarationTest(){
+        app.mainPage.selectSearchMode(targetSearchMode)
+                .clickSearchBtn();
+
+        app.doctorSearchResultsPage.isLoaded()
+                .checkSearchQueryAtSearchField("")
+                .selectLabelAtFilter("При заключеній декларації")
+                .checkFiltrationChip("При заключеній декларації")
+                .scrollPageToFooter()
+                .checkFreeWithDeclarationLabelOnDoctorCards(10);
+    }
 }
